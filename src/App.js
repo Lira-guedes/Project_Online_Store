@@ -1,6 +1,8 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import productList from './pages/productList';
 // subindo codigo da branch lira
 
 function App() {
@@ -17,8 +19,14 @@ function App() {
         >
           Learn React
         </a>
+        
 
       </header>
+      <>
+        <Switch>
+          <Route path="/" component={ productList } exact />
+        </Switch>
+      </>
     </div>
   );
 }
