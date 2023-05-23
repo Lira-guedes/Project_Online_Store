@@ -13,6 +13,7 @@ export default class productList extends Component {
     apiCategory: false,
     inputName: '',
     selectedCategory: '',
+    cart: [],
   };
 
   // monta lista categorias
@@ -46,11 +47,23 @@ export default class productList extends Component {
     const { value } = target;
     // requisição api
     const api = await getProductsFromCategory(value);
-    console.log(api, value);
     this.setState({
       apiCategory: api,
       selectedCategory: value,
     });
+  };
+
+  addProductCart = (elem) => {
+    const { cart } = this.state;
+    console.log(elem);
+    const findProduct = cart.find((elemento) => elem.id === elemento.id);
+    if (findProduct.length > 0) {
+      const newCart = [...cart];
+      this.setState({
+        cart: newCart,
+      });
+      localStorage.setItem('cart', JSON.stringify(newCart));
+    }
   };
 
   render() {
@@ -62,7 +75,6 @@ export default class productList extends Component {
       inputName,
       selectedCategory,
     } = this.state;
-    console.log(inputName);
     // renderiza lista
     const list = productCategory.map(({ id, name }) => (
       <label key={ id } data-testid="category">
@@ -105,13 +117,32 @@ export default class productList extends Component {
                 {
                   // cria um array com a descrição do produto pesquisado na api
                   apiRequest.map((elem) => (
-                    <li key={ elem.id } data-testid="product">
-                      <img src={ elem.thumbnail } alt={ elem.title } />
-                      <h3>{ elem.title }</h3>
-                      <p>
-                        { elem.price }
-                        $
-                      </p>
+                    <li
+                      key={ elem.id }
+                      data-testid="product"
+                      className="productCard"
+                    >
+                      {/* redireciona para a página ProductDetails */ }
+                      <Link
+                        to={ `/ProductDetails/${elem.id}` }
+                        data-testid="product-detail-link"
+                      >
+                        <img src={ elem.thumbnail } alt={ elem.title } />
+                        <h3>{ elem.title }</h3>
+                        <p>
+                          { elem.price }
+                          $
+                        </p>
+                      </Link>
+                      <button
+                        type="button"
+                        data-testid="product-add-to-cart"
+                        onClick={ () => this.addProductCart(elem) }
+                      >
+                        Adicionar ao Carrinho
+                        {' '}
+
+                      </button>
                     </li>
                   ))
                 }
@@ -162,6 +193,14 @@ export default class productList extends Component {
                           $
                         </p>
                       </Link>
+                      <button
+                        type="button"
+                        data-testid="product-add-to-cart"
+                      >
+                        Adicionar ao Carrinho
+                        {' '}
+
+                      </button>
                     </li>
                   ))
                 }
