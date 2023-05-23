@@ -4,6 +4,7 @@ import {
   getCategories,
   getProductsFromQuery,
   getProductsFromCategory,
+  getProductsFromCategoryAndQuery,
 } from '../services/api';
 
 export default class productList extends Component {
@@ -34,10 +35,11 @@ export default class productList extends Component {
   handleSearch = async (event) => {
     event.preventDefault();
     const { inputName } = this.state;
-    // requisição api
-    const api = await getProductsFromQuery(inputName);
+    // requisição ap
+    const api = await getProductsFromCategoryAndQuery('', inputName);
+    /* const api = await getProductsFromQuery(inputName); */
     this.setState({
-      apiRequest: api,
+      apiRequest: api.results,
     });
   };
 
