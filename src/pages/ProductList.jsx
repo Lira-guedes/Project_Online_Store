@@ -11,7 +11,7 @@ export default class productList extends Component {
     productCategory: [],
     apiRequest: false,
     apiCategory: false,
-    productName: '',
+    inputName: '',
     selectedCategory: '',
   };
 
@@ -25,7 +25,7 @@ export default class productList extends Component {
   saveName = ({ target }) => {
     const { value } = target;
     this.setState(() => ({
-      productName: value,
+      inputName: value,
       savedName: value,
     }));
   };
@@ -33,9 +33,9 @@ export default class productList extends Component {
   // faz busca
   handleSearch = async (event) => {
     event.preventDefault();
-    const { productName } = this.state;
+    const { inputName } = this.state;
     // requisição api
-    const api = await getProductsFromQuery(productName);
+    const api = await getProductsFromQuery(inputName);
     this.setState({
       apiRequest: api,
     });
@@ -58,10 +58,10 @@ export default class productList extends Component {
       apiCategory,
       apiRequest,
       savedName,
-      productName,
+      inputName,
       selectedCategory,
     } = this.state;
-    console.log(productName);
+    console.log(inputName);
     // renderiza lista
     const list = productCategory.map(({ id, name }) => (
       <label key={ id } data-testid="category">
@@ -136,7 +136,7 @@ export default class productList extends Component {
           list
         }
 
-        {(!productName) ? (
+        {(!inputName) ? (
           // retorna requisição da api feita na barra de pesquisa
           apiCategory && apiCategory.length > 0 && (
             <div>
@@ -144,7 +144,7 @@ export default class productList extends Component {
                 {
                   // cria um array com a descrição do produto pesquisado na api
                   apiCategory.map((elem) => (
-                    <li key={ elem.id } data-testid="category">
+                    <li key={ elem.id } data-testid="product">
                       <img src={ elem.thumbnail } alt={ elem.title } />
                       <h3>{ elem.title }</h3>
                       <p>
