@@ -9,11 +9,13 @@ export default class productList extends Component {
     name: '',
   };
 
+  // monta lista categorias
   async componentDidMount() {
     const productCategory = await getCategories();
     this.setState({ productCategory });
   }
 
+  // mantém nome na barra de pesquisa
   saveName = ({ target }) => {
     const { value } = target;
     this.setState(() => ({
@@ -26,7 +28,6 @@ export default class productList extends Component {
   handleSearch = async (event) => {
     event.preventDefault();
     const { name } = this.state;
-    console.log(name);
     // requisição api
     const api = await getProductsFromQuery(name);
     this.setState({
@@ -36,8 +37,8 @@ export default class productList extends Component {
 
   render() {
     const { productCategory, apiRequest, savedName } = this.state;
+    // renderiza lista
     const list = productCategory.map(({ id, name }) => (
-
       <li
         data-testid="category"
         key={ id }
@@ -51,13 +52,13 @@ export default class productList extends Component {
       </li>
     ));
     return (
+      // barra de pesquisa e botão
       <>
         <label htmlFor="">
           <input
             type="text"
             data-testid="query-input"
             name="name"
-            // value={ savedName }
             onChange={ this.saveName }
           />
         </label>
@@ -68,6 +69,7 @@ export default class productList extends Component {
           Pesquisar
         </button>
         {
+          // retorna requisição da api feita na barra de pesquisa
           apiRequest && apiRequest.length > 0 && (
             <div>
               <h2>
@@ -77,6 +79,7 @@ export default class productList extends Component {
               </h2>
               <ul>
                 {
+                  // cria um array com a descrição do produto pesquisado na api
                   apiRequest.map((elem) => (
                     <li key={ elem.id } data-testid="product">
                       <img src={ elem.thumbnail } alt={ elem.title } />
@@ -93,6 +96,7 @@ export default class productList extends Component {
           )
         }
         {
+          // retorna erro se produto não existir
           apiRequest.length === 0 && (<p>Nenhum produto foi encontrado</p>)
         }
 
@@ -103,8 +107,10 @@ export default class productList extends Component {
 
         </p>
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
-
-        {list}
+        {
+          // chama lista categorias
+          list
+        }
       </>
     );
   }
