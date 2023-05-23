@@ -71,7 +71,7 @@ export default class productList extends Component {
           apiRequest && apiRequest.length > 0 && (
             <div>
               <h2>
-                Resultado de álbuns de:
+                Resultado:
                 {' '}
                 {savedName}
               </h2>
