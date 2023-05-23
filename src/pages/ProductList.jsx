@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getProductsFromQuery } from '../services/api';
+import {
+  getCategories,
+  getProductsFromCategory,
+  getProductsFromCategoryAndQuery,
+} from '../services/api';
 
 export default class productList extends Component {
   state = {
     productCategory: [],
     apiRequest: false,
-    name: '',
+    apiCategory: false,
+    inputName: '',
+    selectedCategory: '',
   };
 
   // monta lista categorias
@@ -19,7 +25,7 @@ export default class productList extends Component {
   saveName = ({ target }) => {
     const { value } = target;
     this.setState(() => ({
-      name: value,
+      inputName: value,
       savedName: value,
     }));
   };
@@ -27,29 +33,47 @@ export default class productList extends Component {
   // faz busca
   handleSearch = async (event) => {
     event.preventDefault();
-    const { name } = this.state;
-    // requisição api
-    const api = await getProductsFromQuery(name);
+    const { inputName } = this.state;
+    // requisição ap
+    const api = await getProductsFromCategoryAndQuery('', inputName);
+    /* const api = await getProductsFromQuery(inputName); */
     this.setState({
-      apiRequest: api,
+      apiRequest: api.results,
+    });
+  };
+
+  handleSearchCategory = async ({ target }) => {
+    const { value } = target;
+    // requisição api
+    const api = await getProductsFromCategory(value);
+    console.log(api, value);
+    this.setState({
+      apiCategory: api,
+      selectedCategory: value,
     });
   };
 
   render() {
-    const { productCategory, apiRequest, savedName } = this.state;
+    const {
+      productCategory,
+      apiCategory,
+      apiRequest,
+      savedName,
+      inputName,
+      selectedCategory,
+    } = this.state;
+    console.log(inputName);
     // renderiza lista
     const list = productCategory.map(({ id, name }) => (
-      <li
-        data-testid="category"
-        key={ id }
-      >
-        <a
-          href="test"
-        >
-          {name}
-
-        </a>
-      </li>
+      <label key={ id } data-testid="category">
+        <input
+          type="radio"
+          value={ id }
+          checked={ selectedCategory === id }
+          onChange={ this.handleSearchCategory }
+        />
+        {name}
+      </label>
     ));
     return (
       // barra de pesquisa e botão
@@ -95,6 +119,7 @@ export default class productList extends Component {
             </div>
           )
         }
+
         {
           // retorna erro se produto não existir
           apiRequest.length === 0 && (<p>Nenhum produto foi encontrado</p>)
@@ -107,10 +132,43 @@ export default class productList extends Component {
 
         </p>
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+
         {
-          // chama lista categorias
           list
         }
+
+        {(!inputName) ? (
+          // retorna requisição da api feita na barra de pesquisa
+          apiCategory && apiCategory.length > 0 && (
+            <div>
+              <ul>
+                {
+                  // cria um array com a descrição do produto pesquisado na api
+                  apiCategory.map((elem) => (
+                    <li
+                      key={ elem.id }
+                      data-testid="product"
+                      className="productCard"
+                    >
+                      {/* redireciona para a página ProductDetails */ }
+                      <Link
+                        to={ `/ProductDetails/${elem.id}` }
+                        data-testid="product-detail-link"
+                      >
+                        <img src={ elem.thumbnail } alt={ elem.title } />
+                        <h3>{ elem.title }</h3>
+                        <p>
+                          { elem.price }
+                          $
+                        </p>
+                      </Link>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          )
+        ) : ('')}
       </>
     );
   }
