@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   getCategories,
-  getProductsFromQuery,
   getProductsFromCategory,
   getProductsFromCategoryAndQuery,
 } from '../services/api';
