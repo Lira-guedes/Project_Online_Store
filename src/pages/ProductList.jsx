@@ -145,13 +145,23 @@ export default class productList extends Component {
                 {
                   // cria um array com a descrição do produto pesquisado na api
                   apiCategory.map((elem) => (
-                    <li key={ elem.id } data-testid="product">
-                      <img src={ elem.thumbnail } alt={ elem.title } />
-                      <h3>{ elem.title }</h3>
-                      <p>
-                        { elem.price }
-                        $
-                      </p>
+                    <li
+                      key={ elem.id }
+                      data-testid="product"
+                      className="productCard"
+                    >
+                      {/* redireciona para a página ProductDetails */ }
+                      <Link
+                        to={ `/ProductDetails/${elem.id}` }
+                        data-testid="product-detail-link"
+                      >
+                        <img src={ elem.thumbnail } alt={ elem.title } />
+                        <h3>{ elem.title }</h3>
+                        <p>
+                          { elem.price }
+                          $
+                        </p>
+                      </Link>
                     </li>
                   ))
                 }
