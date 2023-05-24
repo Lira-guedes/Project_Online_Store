@@ -10,25 +10,6 @@ export default class Cart extends Component {
     this.setState({ cart }/* , () => this.quantityProducts() */);
   }
 
-  /*  quantityProducts = () => {
-    const { cart } = this.state;
-    const newCart = [];
-    if (cart) {
-      const quantity = cart.map((product) => {
-        const id2 = product.id;
-        return cart.filter(({ id }) => id === id2).length;
-      });
-      cart.forEach((product, index) => {
-        const count = quantity[index];
-        product.quantity = count;
-        newCart.push(product);
-      });
-    }
-
-    this.setState({ cart });
-    // só falta filtrar o array cart
-  }; */
-
   render() {
     const { cart } = this.state;
     console.log(cart);
