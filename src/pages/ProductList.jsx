@@ -20,8 +20,9 @@ export default class productList extends Component {
   async componentDidMount() {
     const productCategory = await getCategories();
     this.setState({ productCategory });
+
+    // Resgata o cart do local storage e salva no state
     const cart = JSON.parse(localStorage.getItem('cart'));
-    console.log(cart);
     this.setState({ cart });
   }
 
@@ -57,25 +58,34 @@ export default class productList extends Component {
   };
 
   addProductCart = (elem) => {
-    /* const { cart } = this.state; */
     const { cart } = this.state;
-    let newCart;
+
+    // verifica se o produto ja existe no cart e atualiza quantidade!
+    let newCart = [];
     if (cart) {
-      newCart = [...cart, elem];
+      if (cart.some((product) => product.id === elem.id)) {
+        console.log(cart);
+        cart.forEach((product) => {
+          if (product.id === elem.id) {
+            const previousQuantity = product.quantity;
+            product.quantity = (previousQuantity + 1);
+            console.log(previousQuantity);
+          }
+          newCart.push(product);
+        });
+      } else {
+        elem.quantity = 1;
+        newCart = [...cart, elem];
+      }
     } else {
+      console.log('aqui');
+      elem.quantity = 1;
       newCart = [elem];
     }
+
+    // salva o cart atualizado
     localStorage.setItem('cart', JSON.stringify(newCart));
     this.setState({ cart: newCart });
-    /*  const findProduct = cart.find((elemento) => elem.id === elemento.id);
-    if (findProduct.length > 0) {
-      const newCart = [...cart];
-      this.setState({
-        cart: newCart,
-      });
-      localStorage.setItem('cart', JSON.stringify(newCart));
-    } */
-    /* const newCart = cart.push(elem); */
   };
 
   render() {
@@ -209,6 +219,7 @@ export default class productList extends Component {
                       <button
                         type="button"
                         data-testid="product-add-to-cart"
+                        onClick={ () => this.addProductCart(elem) }
                       >
                         Adicionar ao Carrinho
                         {' '}
