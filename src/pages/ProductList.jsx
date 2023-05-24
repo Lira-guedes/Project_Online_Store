@@ -7,7 +7,7 @@ import {
 } from '../services/api';
 import cartLogo from '../images/cartLogo.png';
 
-export default class productList extends Component {
+export default class ProductList extends Component {
   state = {
     productCategory: [],
     apiRequest: false,
