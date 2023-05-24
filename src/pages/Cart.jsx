@@ -46,7 +46,9 @@ export default class Cart extends Component {
             { product.price }
             $
           </p>
-          <p data-testid="shopping-cart-product-quantity">{product.quantity}</p>
+          <p data-testid="shopping-cart-product-quantity">
+            {`Quantidade: ${product.quantity}`}
+          </p>
         </li>
       ));
     }
