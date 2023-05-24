@@ -20,6 +20,9 @@ export default class productList extends Component {
   async componentDidMount() {
     const productCategory = await getCategories();
     this.setState({ productCategory });
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    console.log(cart);
+    this.setState({ cart });
   }
 
   // mantém nome na barra de pesquisa
@@ -54,16 +57,25 @@ export default class productList extends Component {
   };
 
   addProductCart = (elem) => {
+    /* const { cart } = this.state; */
     const { cart } = this.state;
-    console.log(elem);
-    const findProduct = cart.find((elemento) => elem.id === elemento.id);
+    let newCart;
+    if (cart) {
+      newCart = [...cart, elem];
+    } else {
+      newCart = [elem];
+    }
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    this.setState({ cart: newCart });
+    /*  const findProduct = cart.find((elemento) => elem.id === elemento.id);
     if (findProduct.length > 0) {
       const newCart = [...cart];
       this.setState({
         cart: newCart,
       });
       localStorage.setItem('cart', JSON.stringify(newCart));
-    }
+    } */
+    /* const newCart = cart.push(elem); */
   };
 
   render() {
@@ -143,6 +155,7 @@ export default class productList extends Component {
                         {' '}
 
                       </button>
+
                     </li>
                   ))
                 }

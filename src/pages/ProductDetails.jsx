@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { getProductById } from '../services/api';
 
 export default class ProductDetails extends Component {
@@ -21,7 +22,9 @@ export default class ProductDetails extends Component {
         <h1 data-testid="product-detail-name">{product.title}</h1>
         <img data-testid="product-detail-image" src={ product.thumbnail } alt="" />
         <p data-testid="product-detail-price">{product.price}</p>
-        <button data-testid="shopping-cart-button">ir para o carrinho</button>
+        <Link to="/Cart">
+          <button data-testid="shopping-cart-button">ir para o carrinho</button>
+        </Link>
       </div>
     );
   }
