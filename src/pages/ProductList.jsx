@@ -78,7 +78,7 @@ export default class productList extends Component {
         newCart = [...cart, elem];
       }
     } else {
-      console.log('aqui');
+      console.log('primeiro produto');
       elem.quantity = 1;
       newCart = [elem];
     }
