@@ -227,13 +227,13 @@ export default class ProductDetails extends Component {
             ) : (
               avaliations.map((avaliation, index) => (
                 <li key={ index }>
-                  <strong data-testid="review-card-email">Email:</strong>
-                  {avaliation.email}
+                  <strong>Email:</strong>
+                  <span data-testid="review-card-email">{avaliation.email}</span>
                   <br />
-                  <strong data-testid="review-card-rating">Nota:</strong>
-                  {avaliation.rate}
-                  <strong data-testid="review-card-evaluation">Comentário:</strong>
-                  {avaliation.opiniao}
+                  <strong>Nota:</strong>
+                  <span data-testid="review-card-rating">{avaliation.rate}</span>
+                  <strong>Comentário:</strong>
+                  <span data-testid="review-card-evaluation">{avaliation.opiniao}</span>
                   <br />
                 </li>
               ))

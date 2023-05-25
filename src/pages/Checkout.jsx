@@ -22,7 +22,6 @@ export default class Checkout extends Component {
 
   handleAvaliation = ({ target }) => {
     const { name, value, type } = target;
-    console.log(name, value, type);
     if (type === 'radio') {
       this.setState({ selectedPayment: value });
     }
@@ -54,11 +53,10 @@ export default class Checkout extends Component {
 
   completedPurchase = (event) => {
     event.preventDefault();
-    const newCart = [];
     const result = this.changeIsValidInputs();
     if (result) {
-      localStorage.setItem('cart', JSON.stringify(newCart));
-      this.setState({ finish: true, cart: newCart });
+      localStorage.clear();
+      this.setState({ finish: true });
     }
   };
 

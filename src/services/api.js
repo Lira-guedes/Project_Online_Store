@@ -33,6 +33,5 @@ export async function getProductById(id) {
   // Atenção: essa função não deverá ser chamada na tela do carrinho de compras.
   const response = await fetch(`https://api.mercadolibre.com/items/${id}`);
   const jsonData = await response.json();
-  console.log(jsonData);
   return jsonData;
 }
