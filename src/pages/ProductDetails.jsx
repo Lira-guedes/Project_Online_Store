@@ -109,7 +109,7 @@ export default class ProductDetails extends Component {
       <>
         <div className="headerDetails">
           <Link to="/">
-            <button data-testid="shopping-cart-button">Voltar</button>
+            <button>Voltar</button>
           </Link>
           <Link to="/Cart">
             <button data-testid="shopping-cart-button">ir para o carrinho</button>
