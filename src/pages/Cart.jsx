@@ -107,12 +107,12 @@ export default class Cart extends Component {
           </Link>
         </div>
         <div className="products">
-          {(cart) && (
-            listProducts
-          ) }
+          {cart
+            ? listProducts
+            : (
+              <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+            )}
 
-          {(listProducts.length === 0) && (
-            <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>)}
           <Link
             to="/Checkout"
             data-testid="checkout-products"
