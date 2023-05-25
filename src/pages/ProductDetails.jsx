@@ -107,35 +107,41 @@ export default class ProductDetails extends Component {
       product, selectRate, isValidInputs, avaliations, email, opiniao } = this.state;
     return (
       <>
-        <div>
+        <div className="headerDetails">
+          <Link to="/">
+            <button data-testid="shopping-cart-button">Voltar</button>
+          </Link>
           <Link to="/Cart">
             <button data-testid="shopping-cart-button">ir para o carrinho</button>
           </Link>
         </div>
         <div>
-          <h1 data-testid="product-detail-name">{product.title}</h1>
-          <img data-testid="product-detail-image" src={ product.thumbnail } alt="" />
-          <p data-testid="product-detail-price">{product.price}</p>
-          <button
-            type="button"
-            data-testid="product-detail-add-to-cart"
-            onClick={ () => this.addProductCart(product) }
-          >
-            Adicionar ao Carrinho
-          </button>
-
-          <form name="meu_form">
-
-            <label htmlFor="email">Email:</label>
-            <input
-              data-testid="product-detail-email"
-              type="email"
-              required="required"
-              name="email"
-              value={ email }
-              onChange={ this.handleAvaliation }
-            />
-
+          <div className="detailsCard">
+            <img data-testid="product-detail-image" src={ product.thumbnail } alt="" />
+            <div className="informations">
+              <h3 data-testid="product-detail-name">{product.title}</h3>
+              <p data-testid="product-detail-price">{product.price}</p>
+              <button
+                type="button"
+                data-testid="product-detail-add-to-cart"
+                onClick={ () => this.addProductCart(product) }
+              >
+                Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+          <form name="meu_form" className="detailsCardForm">
+            <label htmlFor="email">
+              Email:
+              <input
+                data-testid="product-detail-email"
+                type="email"
+                required="required"
+                name="email"
+                value={ email }
+                onChange={ this.handleAvaliation }
+              />
+            </label>
             <label>
               <input
                 data-testid="1-rating"
@@ -147,7 +153,6 @@ export default class ProductDetails extends Component {
               />
               1
             </label>
-
             <label>
               <input
                 required
@@ -160,7 +165,6 @@ export default class ProductDetails extends Component {
               />
               2
             </label>
-
             <label>
               <input
                 data-testid="3-rating"
@@ -172,7 +176,6 @@ export default class ProductDetails extends Component {
               />
               3
             </label>
-
             <label>
               <input
                 data-testid="4-rating"
@@ -184,7 +187,6 @@ export default class ProductDetails extends Component {
               />
               4
             </label>
-
             <label>
               <input
                 data-testid="5-rating"
@@ -196,16 +198,15 @@ export default class ProductDetails extends Component {
               />
               5
             </label>
-
-            <textarea
-              value={ opiniao }
-              name="opiniao"
-              placeholder="Deixe sua opnião"
-              data-testid="product-detail-evaluation"
-              onChange={ this.handleAvaliation }
-
-            />
-
+            <label>
+              <textarea
+                value={ opiniao }
+                name="opiniao"
+                placeholder="Deixe sua opnião"
+                data-testid="product-detail-evaluation"
+                onChange={ this.handleAvaliation }
+              />
+            </label>
             <button
               type="submit"
               className="enviar"
@@ -216,12 +217,11 @@ export default class ProductDetails extends Component {
             >
               Enviar
             </button>
-
           </form>
           {(!isValidInputs) && (
             <p data-testid="error-msg">Campos inválidos</p>
           )}
-          <div>
+          <div className="detailsLi">
             {!avaliations ? (
               <p>Nenhuma avaliação disponível.</p>
             ) : (
@@ -239,7 +239,6 @@ export default class ProductDetails extends Component {
               ))
             )}
           </div>
-          <div className="" />
         </div>
       </>
     );

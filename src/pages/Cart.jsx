@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default class Cart extends Component {
   state = {
@@ -74,37 +75,46 @@ export default class Cart extends Component {
           <p data-testid="shopping-cart-product-quantity">
             {`Quantidade: ${product.quantity}`}
           </p>
-          <button
-            data-testid="product-increase-quantity"
-            onClick={ () => this.handleIncrease(product) }
-          >
-            +
-          </button>
-          <button
-            data-testid="product-decrease-quantity"
-            onClick={ () => this.handleDecrease(product) }
-          >
-            -
-          </button>
+          <div className="botoesMaisMenos">
+            <button
+              data-testid="product-increase-quantity"
+              onClick={ () => this.handleIncrease(product) }
+            >
+              +
+            </button>
+            <button
+              data-testid="product-decrease-quantity"
+              onClick={ () => this.handleDecrease(product) }
+            >
+              -
+            </button>
+          </div>
           <button
             data-testid="remove-product"
             onClick={ () => this.handleDelete(product) }
           >
-            X
+            Delete
           </button>
         </li>
       ));
     }
 
     return (
-      <div>
-        {(cart) ? (
-          listProducts
-        ) : (
-          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-        )}
+      <>
+        <div className="headerDetails">
+          <Link to="/">
+            <button data-testid="shopping-cart-button">Voltar</button>
+          </Link>
+        </div>
+        <div className="products">
+          {(cart) ? (
+            listProducts
+          ) : (
+            <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+          )}
 
-      </div>
+        </div>
+      </>
     );
   }
 }

@@ -7,6 +7,20 @@
   display: flex;
 }
 
+.searchField {
+  display: flex;
+}
+
+.searchField button {
+  background-color: rgb(24, 124, 114);
+  border: 1px solid  rgb(24, 124, 114);
+  border-radius: 21px;
+  color: white;
+  margin: 20px 45px;
+  padding: 5px;
+}
+
+
 .categoriesContainer {
   background-color: rgb(24, 124, 114);
   box-sizing: border-box;
@@ -45,9 +59,13 @@
 }
 
 .asideContainerTopSubContainer input {
-  margin: 30px 0 0 230px;
+  background-color: white;
+  border: 4px rgb(18, 103, 95);
+  border-radius: 11px;
+  box-shadow: 8px 4px 19px  rgba(18, 103, 95, 0.9);
+  margin: 30px;
   padding: 10px;
-  width: 700px;
+  width: 600px;
 }
 
 .cartButton img {
@@ -58,7 +76,7 @@
 .productCard {
   align-items: center;
   background-color: white;
-  border: 1px solid rgb(18, 103, 95);
+  border: 1px rgb(18, 103, 95);
   border-radius: 11px;
   box-shadow: 8px 4px 19px  rgba(18, 103, 95, 0.9);
   box-sizing: border-box;
@@ -75,6 +93,15 @@
 
 .productCard a {
   text-align: center;
+}
+
+.productCard button {
+  background-color: rgb(18, 103, 95);
+  border: 1px solid rgb(18, 103, 95);
+  border-radius: 11px;
+  color: white;
+  margin: 20px 45px;
+  padding: 5px;
 }
 
 .productCard img {
@@ -98,7 +125,97 @@
   transition: 0.6s;
 }
 
+.headerDetails {
+  background-color: rgb(24, 124, 114);
+  display: flex;
+  height: 70px;
+  justify-content: space-between;
+}
+
+.headerDetails button {
+  background-color: white;
+  border: 1px solid rgb(18, 103, 95);
+  border-radius: 11px;
+  color: rgba(13, 66, 60, 0.869);
+  margin: 20px 45px;
+}
+
+.detailsCard {
+  display: flex;
+  margin-bottom: 80px;
+  margin-top: 80px;
+  text-align: center;
+}
+
+.detailsCard img {
+  height: 350px;
+}
+
+.informations {
+  align-items: center;
+  background-color: white;
+  border: 1px rgb(18, 103, 95);
+  border-radius: 11px;
+  box-shadow: 8px 4px 19px  rgba(18, 103, 95, 0.9);
+  padding: 40px;
+}
+
+.informations button {
+  background-color: rgb(18, 103, 95);
+  border: 1px solid rgb(18, 103, 95);
+  border-radius: 11px;
+  color: white;
+  margin: 20px 45px;
+  padding: 5px;
+}
+
+.detailsCardForm {
+  background-color: rgb(18, 103, 95);
+  box-shadow: 8px 4px 19px  rgba(18, 103, 95, 0.9);
+  color: white;
+  display: flex;
+  margin-bottom: 45px;
+  padding: 37px;
+  text-align: center;
+}
+
+.detailsCardForm label {
+  color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.detailsCardForm button {
+  background-color: white;
+  border: 1px rgb(18, 103, 95);
+  border-radius: 20px;
+  margin-left: 30px;
+}
+
+.detailsLi {
+  margin-bottom: 170px;
+}
+
+.detailsLi li {
+  border-radius: 10px;
+  box-shadow: 8px 4px 19px  rgba(18, 103, 95, 0.9);
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding: 20px;
+}
+
 .products {
   display: flex;
   flex-flow: wrap;
+}
+
+.botoesMaisMenos button {
+  background-color: white;
+  border: 1px solid rgba(18, 103, 95, 0.5);
+  border-radius: 50px;
+  box-shadow: 8px 4px 19px  rgba(18, 103, 95, 0.9);
+  color: black;
+  margin-top: 1px;
+  padding: 8px 10px;
 }
