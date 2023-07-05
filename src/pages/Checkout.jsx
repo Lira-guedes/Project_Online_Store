@@ -79,7 +79,6 @@ export default class Checkout extends Component {
         <form>
           <label
             htmlFor="fullName"
-
           >
             Nome Completo
 
